@@ -1,1 +1,1 @@
-# salon-booking-system-
+# salon-booking-system
