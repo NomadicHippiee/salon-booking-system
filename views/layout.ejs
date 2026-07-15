@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title !== 'undefined' ? title : 'Hair Salon' %></title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/services" class="nav-link">Services</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <%- body %>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Hair Salon. All rights reserved.</p>
+    </footer>
+    
+</body>
+</html>

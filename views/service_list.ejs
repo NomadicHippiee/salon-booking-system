@@ -1,0 +1,15 @@
+<h1>Our Services</h1>
+
+<div class="service-grid">
+    <% services.forEach(service => { %>
+        <div class="service-card">
+            <h3><%= service.name %></h3>
+            <p><% service.description %></p>
+            <div class="service-info">
+                <span class="duration"><%= service.duration_minutes %> min</span>
+                <span class="price">$<%= parseFloat(service.price).toFixed(2) %></span>
+            </div>
+            <a href="/services/<%= service.id %>" class="btn">View Details</a>
+        </div>
+    <% }) %>    
+</div>
