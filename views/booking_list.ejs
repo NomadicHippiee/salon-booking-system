@@ -1,0 +1,31 @@
+<h1>All Bookings</h1>
+
+<div class="bookings-table-wrapper">
+    <table class="bookings-table">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Service</th>
+                <th>Stylist</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% bookings.forEach(booking => { %>
+                <tr>
+                    <td><%= booking.customer_name %></td>
+                    <td><%= booking.service_name %></td>
+                    <td><%= booking.stylist_name %></td>
+                    <td><%= new Date(booking.booking_date).toLocaleDateString() %></td>
+                    <td><%= booking.start_time %></td>
+                    <td><span class="status <%= booking.status %>"><%= booking.status %></span></td>
+                </tr>
+
+
+            <% }); %>
+
+        </tbody>
+    </table>
+</div>

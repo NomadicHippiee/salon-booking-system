@@ -1,0 +1,67 @@
+<div class="form-container">
+  <h1>Book an Appointment</h1>
+
+  <% if (errors.length > 0) { %>
+    <div class="alert alert-error">
+      <ul>
+        <% errors.forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }); %>
+      </ul>
+    </div>
+  <% } %>
+
+  <form method="POST" class="form" action="/bookings">
+    <div class="form-group">
+      <label for="customer_name">Your Name *</label>
+      <input type="text" id="customer_name" name="customer_name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="customer_email">Email</label>
+      <input type="email" id="customer_email" name="customer_email" placeholder="john@example.com">
+    </div>
+
+    <div class="form-group">
+      <label for="customer_phone">Phone</label>
+      <input type="text" id="customer_phone" name="customer_phone" placeholder="555-123-4567">
+    </div>
+
+    <div class="form-group">
+      <label for="stylist_id">Stylist *</label>
+      <select id="stylist_id" name="stylist_id" required>
+        <option value="">-- Select a Stylist --</option>
+        <% stylists.forEach(stylist => { %>
+          <option value="<%= stylist.id %>"><%= stylist.name %></option>
+        <% }); %>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="service_id">Service *</label>
+      <select id="service_id" name="service_id" required>
+        <option value="">-- Select a Service --</option>
+        <% services.forEach(service => { %>
+          <option value="<%= service.id %>" <%= preSelectedServiceId == service.id ? 'selected' : '' %>>
+            <%= service.name %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="booking_date">Date *</label>
+      <input type="date" id="booking_date" name="booking_date" required>
+    </div>
+
+    <div class="form-group">
+      <label for="start_time">Time (HH:MM) *</label>
+      <input type="time" id="start_time" name="start_time" required>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Book Appointment</button>
+      <a href="/services" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
