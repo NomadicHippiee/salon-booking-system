@@ -89,3 +89,62 @@ exports.createBooking = [
         }
     }
 ];
+
+exports.getDeleteBookingForm = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await pool.query(`
+            SELECT b.id, 
+            b.customer_name,
+            b.booking_date,
+            b.start_time,
+            s.name as service_name,
+            st.name as stylist_name 
+            FROM bookings b JOIN services s ON b.service_id = s.id
+            JOIN stylists st ON b.stylist_id = st.id WHERE b.id = $1
+            `, [id]);
+
+            if (result.rowCount.length === 0) {
+                return res.status(404).send('Booking not found');
+            }
+
+            const booking = result.rows[0];
+            res.render('booking_delete', { booking, error: null });
+        } catch (error) {
+            console.error('Error fetching booking:', error);
+            res.status(500).send('Error fetching booking');
+        }
+    };
+
+exports.deleteBooking = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { adminPassword } = req.body;
+
+    if (adminPassword !== process.env.ADMIN_PASSWORD) {
+      const booking = await pool.query(`
+        SELECT 
+          b.id, 
+          b.customer_name, 
+          b.booking_date,
+          b.start_time,
+          s.name as service_name,
+          st.name as stylist_name
+        FROM bookings b
+        JOIN services s ON b.service_id = s.id
+        JOIN stylists st ON b.stylist_id = st.id
+        WHERE b.id = $1
+      `, [id]);
+      
+      return res.render('booking_delete', {
+        booking: booking.rows[0],
+        error: 'Incorrect admin password'
+      });
+    }
+    await pool.query('DELETE FROM bookings WHERE id = $1', [id]);
+    res.redirect('/bookings');
+} catch (error) {
+    console.error('Error deleting booking:', error);
+    res.status(500).send('Error deleting booking');
+  }
+};
