@@ -119,4 +119,43 @@ exports.updateService = [
         }
     }
 
-]
+];
+
+exports.getDeleteServiceForm = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await pool.query('SELECT * FROM services WHERE id = $1', [id]);
+
+        if (result.rowCount.length === 0) {
+            return res.status(404).send('Service not found');
+        }
+
+        const service = result.rows[0];
+        res.render('service_delete', { service, error: null });
+    } catch (error) {
+        console.error('Error fetching service: ', error);
+        res.status(500).send('Error fetching service');
+        
+    }
+};
+
+exports.deleteService = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { adminPassword } = req.body;
+
+        if (adminPassword !== process.env.ADMIN_PASSWORD) {
+            const service = await pool.query('SELECT * FROM services WHERE id = $1', [id]);
+            return res.render('service_delete', {
+                service: service.rows[0],
+                error: 'Incorrect admin password'
+            });
+        }
+
+        await pool.query('DELETE FROM services WHERE id = $1', [id]);
+        res.redirect('/services');
+    } catch (error) {
+        console.erroe('Error deleting service: ', error);
+        res.status(500).send('Error deleting service');
+    }
+};
