@@ -141,6 +141,7 @@ exports.deleteBooking = async (req, res) => {
         error: 'Incorrect admin password'
       });
     }
+    
     await pool.query('DELETE FROM bookings WHERE id = $1', [id]);
     res.redirect('/bookings');
 } catch (error) {
