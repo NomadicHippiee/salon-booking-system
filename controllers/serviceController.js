@@ -21,7 +21,7 @@ exports.getServiceDetail = async (req, res) => {
         }
         
         const service = result.rows[0];
-        res.render('service_detail', { service });
+        res.render('service-detail', { service });
     } catch (error) {
         console.error('Error fetching service', error);
         res.status(500).send('Error fetching service')
