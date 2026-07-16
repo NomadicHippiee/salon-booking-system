@@ -1,4 +1,4 @@
-const { validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 const pool = require('../db/db');
 
 exports.getAllServices = async (req, res) => {
