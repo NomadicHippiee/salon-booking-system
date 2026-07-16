@@ -1,0 +1,32 @@
+<div class="form-container">
+  <h1>Delete Service</h1>
+  
+  <div class="alert alert-warning">
+    <p><strong>Warning:</strong> This action cannot be undone. Are you sure?</p>
+  </div>
+
+  <% if (error) { %>
+    <div class="alert alert-error">
+      <p><%= error %></p>
+    </div>
+  <% } %>
+
+  <div class="detail-content">
+    <p><strong>Service:</strong> <%= service.name %></p>
+    <p><strong>Description:</strong> <%= service.description %></p>
+    <p><strong>Duration:</strong> <%= service.duration_minutes %> minutes</p>
+    <p><strong>Price:</strong> $<%= parseFloat(service.price).toFixed(2) %></p>
+  </div>
+
+  <form method="POST" class="form">
+    <div class="form-group">
+      <label for="adminPassword">Admin Password *</label>
+      <input type="password" id="adminPassword" name="adminPassword" required>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-danger">Delete Service</button>
+      <a href="/services/<%= service.id %>" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
