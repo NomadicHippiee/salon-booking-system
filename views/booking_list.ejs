@@ -21,6 +21,7 @@
                     <td><%= new Date(booking.booking_date).toLocaleDateString() %></td>
                     <td><%= booking.start_time %></td>
                     <td><span class="status <%= booking.status %>"><%= booking.status %></span></td>
+                    <td><a href="/bookings/<%= booking.id %>/delete" class="btn btn-danger">Delete</a></td>
                 </tr>
 
 
