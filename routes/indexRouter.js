@@ -20,6 +20,6 @@ router.get('/bookings', bookingController.getAllBookings);
 router.get('/bookings/new', bookingController.getNewBookingForm);
 router.post('/bookings', bookingController.createBooking);
 router.get('/bookings/:id/delete', bookingController.getDeleteBookingForm);
-router.get('/bookings/:id/delete', bookingController.deleteBooking);
+router.post('/bookings/:id/delete', bookingController.deleteBooking);
 
 module.exports = router;

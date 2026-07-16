@@ -3,7 +3,7 @@ const pool = require('../db/db');
 
 exports.getAllServices = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM services');
+        const result = await pool.query('SELECT * FROM services ORDER BY id ASC');
         const services = result.rows;
         res.render('service_list', { services });
     } catch (error) {
@@ -155,7 +155,7 @@ exports.deleteService = async (req, res) => {
         await pool.query('DELETE FROM services WHERE id = $1', [id]);
         res.redirect('/services');
     } catch (error) {
-        console.erroe('Error deleting service: ', error);
+        console.error('Error deleting service: ', error);
         res.status(500).send('Error deleting service');
     }
 };
