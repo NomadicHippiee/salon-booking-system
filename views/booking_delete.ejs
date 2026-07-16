@@ -1,0 +1,33 @@
+<div class="form-container">
+  <h1>Delete Booking</h1>
+  
+  <div class="alert alert-warning">
+    <p><strong>Warning:</strong> This action cannot be undone. Are you sure?</p>
+  </div>
+
+  <% if (error) { %>
+    <div class="alert alert-error">
+      <p><%= error %></p>
+    </div>
+  <% } %>
+
+  <div class="detail-content">
+    <p><strong>Customer:</strong> <%= booking.customer_name %></p>
+    <p><strong>Service:</strong> <%= booking.service_name %></p>
+    <p><strong>Stylist:</strong> <%= booking.stylist_name %></p>
+    <p><strong>Date:</strong> <%= booking.booking_date %></p>
+    <p><strong>Time:</strong> <%= booking.start_time %></p>
+  </div>
+
+  <form method="POST" class="form">
+    <div class="form-group">
+      <label for="adminPassword">Admin Password *</label>
+      <input type="password" id="adminPassword" name="adminPassword" required>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-danger">Delete Booking</button>
+      <a href="/bookings" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
